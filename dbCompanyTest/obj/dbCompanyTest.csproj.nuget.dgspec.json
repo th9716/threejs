@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\MVC\\web\\dbCompanyTest\\dbCompanyTest\\dbCompanyTest.csproj": {}
+    "C:\\Users\\Student\\Documents\\GitHub\\threejs\\dbCompanyTest\\dbCompanyTest.csproj": {}
   },
   "projects": {
-    "C:\\MVC\\web\\dbCompanyTest\\dbCompanyTest\\dbCompanyTest.csproj": {
+    "C:\\Users\\Student\\Documents\\GitHub\\threejs\\dbCompanyTest\\dbCompanyTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\MVC\\web\\dbCompanyTest\\dbCompanyTest\\dbCompanyTest.csproj",
+        "projectUniqueName": "C:\\Users\\Student\\Documents\\GitHub\\threejs\\dbCompanyTest\\dbCompanyTest.csproj",
         "projectName": "dbCompanyTest",
-        "projectPath": "C:\\MVC\\web\\dbCompanyTest\\dbCompanyTest\\dbCompanyTest.csproj",
+        "projectPath": "C:\\Users\\Student\\Documents\\GitHub\\threejs\\dbCompanyTest\\dbCompanyTest.csproj",
         "packagesPath": "C:\\Users\\Student\\.nuget\\packages\\",
-        "outputPath": "C:\\MVC\\web\\dbCompanyTest\\dbCompanyTest\\obj\\",
+        "outputPath": "C:\\Users\\Student\\Documents\\GitHub\\threejs\\dbCompanyTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
