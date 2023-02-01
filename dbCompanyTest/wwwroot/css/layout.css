@@ -1,0 +1,305 @@
+﻿ a{
+    text-decoration:none;
+    color:black;
+}
+
+@media screen and (min-width: 768px) {
+    
+    html {
+        height: auto;
+    }
+
+    body, .shops-pc {
+        /*min-height: 100vh;*/
+    }
+
+        body .shops {
+            display: none;
+        }
+
+        body .shops-pc {
+            display: block;
+        }
+
+
+    .logo {
+        width: 230px;
+        padding: 27px 0 32px;
+        margin: 0 auto;
+    }
+
+    .R-Top-tool {
+        position: absolute;
+        right: 10px;
+        top: 40px;
+    }
+
+    .tool-box {
+        margin: 0px 0px;
+        margin-right: 3em;
+        align-items: center;
+    }
+
+    .tool-p {
+        margin-left: 20px;
+    }
+
+    .g-nums {
+        margin-left: -15px;
+        margin-top: -10px;
+        line-height: 22px;
+        text-align: center;
+        color: #fff;
+        font-size: 12px;
+        overflow: hidden;
+    }
+
+    .shortcut-box {
+        position: absolute;
+        width: 170px;
+        height: 202px;
+        border: 1px solid #d3d3d5;
+        background-color: #fff;
+        color: #d5baa5;
+        top: 2em;
+        right: 12%;
+        z-index: 2;
+        animation: dropdown-menu-fade-in 0.3s ease 1, dropdown-menu-move-down 0.3s ease-out 1;
+        margin-top: 0px;
+        display: none;
+    }
+
+        .shortcut-box a {
+            color: #d5baa5;
+        }
+
+    .shortcut-i {
+        padding: 0 12px;
+        height: 67px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        border-bottom: 1px solid #d3d3d5;
+        color: #d5baa5;
+    }
+
+
+    .R-Top-tool .search-box {
+        width: 160px;
+        /*    position: absolute;*/
+        left: 0;
+        top: 0;
+        transition: left 0.3s;
+        overflow: hidden;
+        opacity: 0;
+        height: 30px;
+    }
+
+        .R-Top-tool .search-box.show {
+            width: 150px;
+            opacity: 1;
+            left: calc(-100% + 10px);
+        }
+
+        .R-Top-tool .search-box input {
+            border: none;
+            border-bottom: 1px solid #d4cdc8;
+            outline: none;
+            padding: 2px 5px;
+            width: 150px;
+            /*margin-top: 2px;*/
+        }
+
+    .web-top {
+        position: fixed;
+        width: 42px;
+        height: 84px;
+        bottom: 300px;
+        right: 64px;
+        display: none;
+        z-index: 2;
+    }
+
+        .web-top .icon {
+            cursor: pointer;
+            width: 42px;
+            height: 42px;
+            background-size: contain;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .web-top .back-top {
+            display: block !important;
+        }
+
+        .web-top .back-top {
+            background-image: url('../homeimg/back-top.png');
+        }
+
+
+    .navtext {
+        font-weight: 600;
+        line-height: 32px;
+        letter-spacing: 2px;
+        color: #636363;
+    }
+
+        .navtext li {
+            margin-right: 28px;
+            font-size: 16px;
+        }
+
+
+}
+
+@media screen and (max-width: 768px) {
+    body .shops {
+        display: flex;
+    }
+
+    body .shops-pc {
+        display: none;
+    }
+
+    .logo img {
+        width: 163px;
+        padding: 27px 0 32px;
+        margin: 0 auto;
+    }
+
+    .shop-header {
+        
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 0.02rem solid #dbdbdb;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .R-Top-tool {
+     /*   position: absolute;
+        right: 10px;
+        top: 40px;*/
+    }
+
+    .tool-box {
+        margin: 0px 0px;
+        margin-right: 3em;
+        align-items: center;
+    }
+
+    .tool-p {
+        margin-left: 20px;
+    }
+
+    .g-nums {
+        margin-left: -15px;
+        margin-top: -10px;
+        line-height: 22px;
+        text-align: center;
+        color: #fff;
+        font-size: 12px;
+        overflow: hidden;
+    }
+
+    .shortcut-box {
+        position: absolute;
+        width: 170px;
+        height: 202px;
+        border: 1px solid #d3d3d5;
+        background-color: #fff;
+        color: #d5baa5;
+        top: 2em;
+        right: 12%;
+        z-index: 2;
+        animation: dropdown-menu-fade-in 0.3s ease 1, dropdown-menu-move-down 0.3s ease-out 1;
+        margin-top: 0px;
+        display: none;
+    }
+
+        .shortcut-box a {
+            color: #d5baa5;
+        }
+
+    .shortcut-i {
+        padding: 0 12px;
+        height: 67px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        border-bottom: 1px solid #d3d3d5;
+        color: #d5baa5;
+    }
+
+
+    .shop-header .search-box {
+        position: absolute;
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        left: 7.5rem;
+        right: 7.5rem;
+         display: none; 
+    }
+
+        .shop-header .search-box.show {
+            width: 150px;
+            opacity: 1;
+            left: calc(-100% + 10px);
+        }
+
+        .shop-header .search-box input {
+            border: none;
+            border-bottom: 1px solid #d4cdc8;
+            outline: none;
+            padding: 2px 5px;
+            width: 150px;
+            /*margin-top: 2px;*/
+        }
+
+    .web-top {
+        position: fixed;
+        width: 42px;
+        height: 84px;
+        bottom: 300px;
+        right: 64px;
+        display: none;
+        z-index: 2;
+    }
+
+        .web-top .icon {
+            cursor: pointer;
+            width: 42px;
+            height: 42px;
+            background-size: contain;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .web-top .back-top {
+            display: block !important;
+        }
+
+        .web-top .back-top {
+            background-image: url('../homeimg/back-top.png');
+        }
+
+
+    .navtext {
+        font-weight: 600;
+        line-height: 32px;
+        letter-spacing: 2px;
+        color: #636363;
+    }
+
+        .navtext li {
+            margin-right: 28px;
+            font-size: 16px;
+        }
+}

@@ -1,0 +1,202 @@
+﻿@model IEnumerable<dbCompanyTest.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Back_Layout_Sneat";
+}
+@*@section Style{
+    <link href="~/css/order.css" rel="stylesheet" />
+}*@
+
+<div style="width:80%;margin:20px auto;">
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.訂單編號)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.付款方式)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.送貨地址)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.總金額)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.下單時間)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.訂單狀態)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.付款狀態)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.收件人名稱)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.收件人電話)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.收件人email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.客戶編號Navigation)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.訂單編號)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.付款方式)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.送貨地址)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.總金額)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.下單時間)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.訂單狀態)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.付款狀態)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.收件人名稱)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.收件人電話)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.收件人email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.客戶編號Navigation.客戶編號)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.訂單編號" class="btn btn-primary mb-3 btnView" style="color:aliceblue">修改</a>
+                        <a class="btn btn-primary mb-3 btnView" style="color:aliceblue" data-bs-toggle="modal" data-bs-target="#addModal">細節</a>
+                        @* <a asp-action="Details" asp-route-id="@item.訂單編號">Details</a>*@
+                        <a asp-action="Delete" asp-route-id="@item.訂單編號" class="btn btn-primary mb-3 btnView" style="color:aliceblue">刪除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <table class="table table-striped-columns">
+                        <thead>
+                            <tr>
+                                <th>訂單編號</th>
+                                <th>商品名稱</th>
+                                <th>色碼</th>
+                                <th>尺寸種類</th>
+                                <th>商品數量</th>
+                                <th>商品價格</th>
+                                <th>總金額</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="SDT_tbody">
+                        </tbody>
+                    </table>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        let docFrag = $(document.createDocumentFragment());
+
+        $.ajax({
+            url: `@Url.Content("~/Orders/getOrderDetails")`,
+            type: "GET",
+            dataType: "json"
+        })
+            .done(data => {
+                let docFrag = $(document.createDocumentFragment());
+                let lastSID = "";
+                $(".btnView").on('click', function () {
+                    let SID = $(this).parents("td").siblings("td").first().text()
+                    let SIDCount = 0; let SIDIndex;
+                    lastSID = SID;
+                    lastSID = lastSID.trim()
+                    $.each(data, function (k, k_val) {
+                        if (lastSID == k_val.訂單編號) {
+                            SIDCount++;
+                            SIDIndex = k - SIDCount + 1;
+                        }
+                    });
+                    //$(`#SID`).val(SID); $(`#CID`).val(CID); $(`#Add`).val(Add);
+                    for (j = SIDIndex; j < SIDCount + SIDIndex; j++) {
+                        const eleODT = $(`<tr></tr>`).append(`
+                                                 <td>${data[j].訂單編號}</td>
+                                                 <td>${data[j].商品名稱}</td>
+                                                 <td>${data[j].色碼}</td>
+                                                 <td>${data[j].尺寸種類}</td>
+                                                 <td>${data[j].商品數量}</td>
+                                                 <td>${data[j].商品價格}</td>
+                                                 <td>${data[j].總金額}</td>`)
+                        docFrag.append(eleODT);
+                    }
+                    $("#SDT_tbody").html(docFrag);
+                });
+            })
+
+                                //$(".btnView").on('click',()=>{
+                                //    let id = $(event.currentTarget).find("input").val();
+                                //    SetOrderDetails(id)
+                                //})
+
+                                //async function SetOrderDetails(id) {
+                                //    //let id =var a = $(event.currentTarget).find("input").val();
+                                //    const reb = await fetch(`@Url.Content("~/Orders/getOrderDetailsid=${id}")`)
+                                //    const data = await reb.json();
+                                //    console.log(reb);
+                                //    if (data != null) {
+                                //        const orderOpts = data.map((value) => {
+                                //            const eleODT = $(`<tr></tr>`).append(
+                                //                ` <td>${data.訂單編號}</td>
+                                //                 <td>${data.Id}</td>
+                                //                 <td>${data.商品價格}</td>
+                                //                 <td>${data.商品數量}</td>
+                                //                 <td>${data.總金額}</td>`
+                                //            )
+                                //            //docFrag.append(eleODT);
+                                //         return "OK"
+                                //        });
+                                //    }
+                                //    $("#SDT_tbody").html(docFrag);
+                                //}
+    </script>
+}

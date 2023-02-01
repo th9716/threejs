@@ -1,0 +1,318 @@
+﻿@using X.PagedList
+@using X.PagedList.Web.Common
+@using X.PagedList.Mvc.Core
+@model IPagedList<dbCompanyTest.ViewModels.ProductWallViewModel>
+
+
+@section Style{
+    <link href="~/css/ProductWall.css" rel="stylesheet">
+
+}
+
+    <div class="container-fluid py-5" style="font-family:'Microsoft YaHei';">
+    <div class="row">
+            <div class="col-lg-3 "></div>
+            <div class=" col-lg-6 ">
+                <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">首頁</a></li>
+                        @{
+                        string type= "";
+                        int typeid = 0;
+                        foreach (var item in Model){
+                            type = item.商品分類名稱;
+                            typeid = item.商品分類id;
+                        }
+                                                                            <li class="breadcrumb-item active" aria-current="page" id="type">@type</li>
+                                                                            <input type="hidden" id="typeid" value="@typeid" />
+                        }
+                    </ol>
+                </nav>
+            </div>
+            <div class="keywords-btn-pc col-lg-1 ">篩選條件</div>
+            <div class="col-lg-2 "></div>
+    </div>
+
+    <div class="row ">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 d-flex">
+                <div class="col-md-2 row ">
+                <div class="col-md-6">
+                    <ul class="list-inline shop-top-menu pb-3 pt-1" id="sclass">
+                        
+                        @*@foreach (var item in Model)
+                        {
+                            <li class="list-inline-item">
+                                <a class="h5 text-dark text-decoration-none" asp-action="type" asp-route-id="@item.商品鞋種id" asp-route-tid="@item.商品分類id" asp-route-type="@item.商品分類名稱">@item.鞋種名稱</a>
+                            </li>
+                        }*@
+                    </ul>
+                </div>
+            </div>
+            <div class="row col-md-10" id="f-content">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-3 p-2 ">
+                        <a asp-action="Details" asp-route-id="@item.商品id" asp-route-colorID="@item.商品顏色id">
+                                <div class="card mb-4 product-wap rounded-0">
+                                    <div class="card rounded-0">
+                                        <div>
+                                            @{
+                                                if (@item.產品圖片1 != null)
+                                                {
+                                                                                                               <img class="card-img rounded-0 img-fluid" src="~/images/@item.產品圖片1" width="236" height="324" />
+                                                }
+                                                else
+                                                {
+                                                                                                               <img class="card-img rounded-0 img-fluid" src="~/images/404.jpg" width="236" height="324" />
+                                                }
+                                            }
+                                        </div>
+                                        <div class="card-body">
+                                            <a class="g-item" asp-action="Details" asp-route-id="@item.商品id" asp-route-colorID="@item.商品顏色id">@item.商品名稱  @item.顏色名稱</a>
+                                        
+                                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0 price-box">
+                                            @{
+                                                decimal 價格 = item.商品價格;
+                                                                                                    <li>@價格.ToString("###,###,##0")$</li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                <nav>
+                    <ul class="pagination justify-content-center ">
+                        @*        <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        </li>
+                        *@        @Html.PagedListPager((IPagedList)Model, page=>Url.Action("Index",new {page}))
+                        @*        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>*@
+                        @*        <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        </li>
+                        *@
+                    </ul>
+                </nav>
+                </div>
+        </div>
+        <div class="col-lg-2 sidebar-words sidebar-words-pc" style="right: 0px;" id="select">
+        </div>
+    </div>
+    
+    
+</div>
+
+
+
+
+<br />
+
+
+
+@section Scripts{
+    <script>$("#select").load("@Url.Content("~/ProductWall/selectview")")</script>
+    <script>
+        $("#sclass").load("@Url.Content("~/ProductWall/typeNav?id=")" + $("#typeid").val() + "&type=" + $("#type").text());
+     </script>
+        
+    <script>
+
+
+        /*
+        注入右側篩選欄
+        */
+         //screenWords();
+         //function screenWords(){
+         //	let _html =
+         //    `<div class="words-statis">
+         //			<div class="num">- 篩選條件 | <span>1</span> |</div>
+         //			<a href="" class="clear-words">清除</a>
+         //		</div>
+         //		<div class="words-content">
+         //			<div class="w-item">
+         //				<div class="w-title">尺寸</div>
+         //				<ul>
+         //                           <li class=" checked"><a href=""> 36 </a> <img src="/homeimg/checked.png" /></li>
+         //                           <li class=""><a href=""> 37 </a><img src="/homeimg/checked.png" /></li>
+         //                           <li class="dpnone"><a href=""> 38 </a><img src="/homeimg/checked.png" /></li>
+         //                           <li class="dpnone"><a href=""> 39 </a><img src="/homeimg/checked.png" /></li>
+         //                           <li class="dpnone"><a href=""> 40 </a><img src="/homeimg/checked.png" /></li>
+         //                           <li class="dpnone"><a href=""> 41 </a><img src="/homeimg/checked.png" /></li>
+         //				</ul>
+         //				<a href="javacript:;" class="watch-more">+ 查看更多</a>
+         //			</div>
+         //			<div class="w-item">
+         //				<div class="w-title">顏色</div>
+         //				<ul>
+         //                           <li class=" checked"><a href=""> 黑色 </a> <img src="/homeimg/checked.png" /></li>
+         //                           <li class=""><a href=""> 棕色 </a><img src="/homeimg/checked.png" /></li>
+         //                           <li class="dpnone"><a href=""> 紅色 </a><img src="/homeimg/checked.png" /></li>
+         //                           <li class="dpnone"><a href=""> 白色 </a><img src="/homeimg/checked.png" /></li>
+         //				</ul>
+         //				<a href="" class="watch-more">+ 查看更多</a>
+         //			</div>
+         //		</div>` ;
+         //   $('.sidebar-words').append(_html)
+         //}
+
+
+        /*
+        關鍵詞篩選部分
+        */
+        // 調起右側邊欄
+        $('body').delegate('.keywords-btn-pc', 'click', function () {
+         	let _this = $(this);
+         	$('body').addClass('showSidebar');
+         	$('.sidebar-words').animate({
+         		right: 250,
+         	}, 500)
+            setTimeout(function () {
+                $('.sidebar-words').addClass('show-s');
+            }, 300);
+         	return false;
+         })
+        //查看更多
+         $('body').delegate('.sidebar-words .watch-more', 'click', function() {
+         	let _this = $(this);
+         	_this.closest(".w-item").find('.dpnone').removeClass('dpnone');
+         	_this.remove() ;
+         	return false ;
+         })
+        //切換關鍵詞選中取消
+         $('body').delegate('.sidebar-words li', 'click', function() {
+         	let _this = $(this);
+         	if( ! _this.hasClass('checked') ){
+         		_this.addClass('checked') ;
+             //選了關鍵詞
+                document.querySelector('#f-content').innerHTML=" ";//清空舊的
+                
+                Search()
+         	}else{
+         		_this.removeClass('checked') ;
+         	}
+         	return false ;
+         })
+        //關鍵詞清除
+         $('body').delegate('.sidebar-words .clear-words', 'click', function() {
+         	let _this = $(this);
+         	$('.sidebar-words').find('li.checked').removeClass('checked') ;
+         	return false ;
+         })
+
+         //ajax
+
+        function Search() {
+            // 若 hash 沒資料，預設取第 1 頁
+            // hash = #，瀏覽器解讀為位置識別符號
+            // # 是用來指導瀏覽器動作的，對伺服器端完全無用。所以，HTTP請求中不包括 #
+            var page = window.location.hash
+                ? window.location.hash.slice(1) : 1;
+
+            // 取資料
+            fetchPage(page);
+        }
+        
+        var fetchPage = function (page) {
+            // 準備搜尋條件資料
+            var filter = {
+                word: $('.checked').text(),
+                page: page,
+                
+            }
+            console.log($('.checked').text());
+            // Ajax 呼叫
+            $.ajax({
+                url: '@Url.Action( "pro","ProductWall")',
+                data: filter,
+                type: 'Post',
+                success: function (resultHtml) {
+                    console.log(resultHtml);
+                    // 取得資料後將目前 hash 重設
+                    window.location.hash = page;
+                    // 將 PartialView 資料寫入 div id="f-content" 的區塊
+                    $('#f-content').html(resultHtml);
+                    // 重設頁碼按鈕
+                    $('#f - content.pagination li a').each(function (i, item) {
+                        // 若是有超連結的頁碼
+                        var hyperLinkUrl = $(item).attr('href');
+                        if (typeof hyperLinkUrl !== 'undefined' && hyperLinkUrl !== false) {
+                            // 取得當前按鈕(<a>)的對應頁碼
+                            var pageNumber = $(item).attr('href');
+                            // 將頁碼按鈕的 href 去除
+                            $(item).attr('href', '#');
+                            // 設定按下頁碼事件
+                            $(item).click(function (event) {
+                                // 停止事件的默認動作，例如有時候我們會利用連結的 <a> 來當作按鈕，
+                                // 他本身 DOM 就擁有連結的功能，但是有時候我們會為他新增 onclick 的事件，
+                                // 而只要在該 <a> 觸發的事件中加入event.preventDefault()，
+                                // 就不會在執行他默認的動作，也就是不會再執行「連結到某個網址」這個動作。
+                                event.preventDefault();
+                                // 取得按下的頁碼的資料
+                                fetchPage(pageNumber);
+                            });
+                        }
+                    });
+                }
+            });
+        };
+
+
+        // 收起側邊欄
+        $("html").delegate(".showSidebar", "click", function (e) {
+            let _con = null;
+            let diff = 0; //0為左側邊欄  1位關鍵詞篩選側邊欄
+            if ($('.sidebar-btn-l').hasClass('showSide')) {
+                _con = $('.sidebar-left'); // 目标不隐藏区域
+            } else {
+                _con = $('.sidebar-words');
+                diff = 1;
+            }
+            if (!_con.is(e.target) && _con.has(e.target).length === 0) {
+                if (diff == 0) {
+                    _con.animate({
+                        left: '-100%',
+                    }, 500);
+                    $('.sidebar-btn-l').removeClass('showSide')
+                } else {
+                    _con.animate({
+                        right: 0,
+                    }, 500);
+                    setTimeout(function () {
+                        $('.sidebar-words').removeClass('show-s');
+                    }, 300);
+                }
+                $('body').removeClass('showSidebar');
+
+            }
+            return;
+        })
+        // 展開欄目
+        $('body').delegate('.sidebar-left .m-1', 'click', function () {
+            let _this = $(this);
+
+            if (_this.hasClass('real-a')) {
+                return true;
+            }
+
+            if (!_this.hasClass('ac') && _this.next('ul').length > 0) {
+                _this.addClass('ac').next('ul').slideDown(300)
+            } else if (_this.hasClass('ac') && _this.next('ul').length > 0) {
+                _this.removeClass('ac').next('ul').slideUp(300);
+            }
+            return false;
+        })
+
+
+
+    </script>
+
+}

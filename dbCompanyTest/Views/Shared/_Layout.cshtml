@@ -1,0 +1,449 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - dbCompanyTest</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dbCompanyTest.styles.css" asp-append-version="true" />
+    <link href="~/css/layout.css" rel="stylesheet" />
+    <link href="~/css/mychat.css" rel="stylesheet" />
+    <link href="~/css/car.css" rel="stylesheet" />
+    @await RenderSectionAsync("Style", required: false)
+</head>
+<body class="pc-model">
+    <header>
+        <div class="shops-pc">
+            <div class=" d-flex justify-content-between" @*style="padding: 1em 0%"*@>
+                @*============== LOGO =================*@
+                <div class="logo">
+                    <a class="" asp-controller="Home" asp-action="Index"><img src="~/homeImg/Shoespace1.png" /></a>
+                </div>
+                @*============== 搜尋,我的最愛,會員中心,購物車 =================*@
+
+                <div class="d-flex justify-content-end R-Top-tool">
+                    <div class="tool-box d-flex">
+                        <div class="search-box container">
+                            <div class="row">
+                                <input class="web-search search_keyword" type="text" placeholder="Search" id="search-box">
+                            </div>
+
+                        </div>
+                        <div class="tool-p flex-fill">
+                            <a id="web-search-btn" href=""><img src="~/homeImg/search_header_pc.png"></a>
+                        </div>
+                        <div class="tool-p shortcut flex-fill" style="font-family:'Microsoft YaHei';">
+                            <a class="tool-item memclick">
+                                <img src="~/homeImg/sign_pc.png">
+                            </a>
+                            <div class="shortcut-box" style="display: blcok;">
+                                <div class="shortcut-i">
+                                    <a asp-controller="MemberCenter" asp-action="Index" class="us">MY ACCOUNT</a>
+                                    <a asp-controller="MemberCenter" asp-action="Index" class="cn">會員中心</a>
+                                </div>
+                                <div class="shortcut-i">
+                                    <a asp-controller="MemberCenter" asp-action="orderinfo" class="us">MY ORDERS</a>
+                                    <a asp-controller="MemberCenter" asp-action="orderinfo" class="cn">訂單查詢</a>
+                                </div>
+                                <div class="shortcut-i" style="display: flex;" id="log">
+                                    <a asp-controller="Login" asp-action="Login" class="us">LOGIN</a>
+                                    <a asp-controller="Login" asp-action="Login" class="cn">登入</a>
+                                </div>
+                                <div class="shortcut-i" style="display: none;" id="log2">
+                                    <a href="@Url.Content("~/Login/Logout")" class="us">LOGOUT</a>
+                                    <a href="@Url.Content("~/Login/Logout")" class="cn">登出</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tool-p flex-fill">
+                            <a class="tool-item flex-fill" asp-controller="MyLove" asp-action="Index"><img src="~/homeImg/collect_pc.png"></a>
+                        </div>
+                        <div class="tool-p shopping-cart flex-fill">
+                            <a class="tool-item car_click" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src="~/homeImg/shopping_cart_pc.png"><span class="g-nums" id="cart_num_pc">0</span></a>
+                        </div>
+
+                    </div>
+                    <div class="collapse  " style="position:absolute;top:2em;right:2%;z-index:3;width:350px;" id="collapseExample">
+                        <div class="card card-body car_body car_all" style="height:500px">
+                            <div class="car_dital car_all" id="car_iten">
+                            </div>
+                            <div class="car_dolor car_all">
+                                <div class="total_twd">
+                                    TOTAL TWD $0
+                                </div>
+                            </div>
+                            <a href="@Url.Content("~/Shopping")" class="car_a car_all" style="color:white;z-index:3">
+                                CHECK OUT
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            @*TOP*@
+            <div class="web-top" style="display: none;">
+                <div class="icon back-top"></div>
+            </div>
+
+
+            @*================= nav ===================*@
+
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom ">
+                <div class="container-fluid">
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
+                        <ul class="navbar-nav flex-sm-grow-1 justify-content-center navtext" id="nav">
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+
+        <div class="shops">
+            <div class=" d-flex justify-content-between shop-header">
+                @*============== Menu =================*@
+                <div class="ms-4">
+                    <a id="menu" href=""><img src="~/homeImg/menu.png"></a>
+                </div>
+                @*============== LOGO =================*@
+                <div class="logo">
+                    <a class="" asp-controller="Home" asp-action="Index"><img src="~/homeImg/Shoespace1.png" /></a>
+                </div>
+                @*============== 搜尋,我的最愛,會員中心,購物車 =================*@
+
+                <div class=" R-Top-tool">
+                    <div class="tool-box ">
+                        <div class="tool-p ">
+                            <a id="web-search-btn" href=""><img src="~/homeImg/search_header_pc.png"></a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="search-box container" style="left: 0.2rem; right: 1.5rem;">
+                        <input class="web-search search_keyword" type="text" placeholder="Search" id="search-box">
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div @*class="container"*@>
+        <main role="main" @*class="pb-3"*@>
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="chatMain" style="z-index:10;">
+        <div class="dot eyes-left"></div>
+        <div class="dot eyes-right"></div>
+        <div class="dot mouth"></div>
+    </div>
+    <div class="chatBody" style="z-index:10;">
+        <div class="chatHeader"><button id="connection" class="btn btn-dark">連線客服</button><p id="errorstring" style="color:red"></p></div>
+        <input id="userName" type="hidden">
+        <div class="chatBBody">
+        </div>
+        <div class="chatFooter">
+            <input type="text" id="message" />
+            <img src="~/images/send.png" id="send" style="width:30px;height:30px;" />
+            <p>由戴浩宇製作</p>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - dbCompanyTest - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>$("#nav").load("@Url.Content("~/Home/nav")")</script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/mychat.js"></script>
+    <script src="~/js/car.js"></script>
+    <script src="~/js/aibot.js"></script>
+    <script>
+
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        $(`#connection`).on(`click`, function () {
+            connection.start().then(async function () {
+                $(`#errorstring`).text("");
+                const data = await fetch("@Url.Content("~/Login/getUser")");
+                const uesrName = await data.text();
+                let selfID = $('#SelfID').html();
+                connection.invoke("getName", uesrName).catch(function (err) {
+                    alert('傳送錯誤: ' + err.toString());
+                });
+                $(`.chatBBody`).append(`<div class="chat">
+                                                                <div class="otherName">系統</div>
+                                                                <div class="otherChat">
+                                                                     親愛的${uesrName},我們很高興為您服務
+                                                                </div>
+                                                            </div>`);
+                $(`#userName`).val(userName);
+            }).catch(function (err) {
+                alert('連線錯誤: ' + err.toString());
+            });
+        })
+
+        connection.on("UpdSelfID", function (id) {
+
+        });
+
+        connection.on("UpdSystem", function (user, msg) {
+            UpdSystem(user, msg);
+        });
+
+
+        connection.on("UpdContent", function (msg) {
+            UpdContent(msg);
+        });
+
+        $(`#send`).on(`click`, async function () {
+            console.log($(`#userName`).val());
+            let message = $('#message').val();
+            if (!$(`#userName`).val()) {
+                if (message != "") {
+                    UpdContent(message);
+                    AIBOT(message);
+                }
+            } else {
+                let selfID = $('#SelfID').html();
+                connection.invoke("SendMessage", selfID, message/*, sendToID*/).then(function () {
+                    $(`#errorstring`).text("");
+                }).catch(function (err) {
+                    $(`#errorstring`).text("請先連線");
+                });
+            }
+        });
+
+        function UpdSystem(user, msg) {
+            $(`.chatBBody`).append(`<div class="chat">
+                                                                <div class="otherName">${user}</div>
+                                                                <div class="otherChat">
+                                                                            ${msg}
+                                                                </div>
+                                                            </div>`);
+            $('.chatBBody').animate({
+                scrollTop: $(".chatBBody").offset().top + $(".chat")[$(".chatBBody").find(".chat").length - 1].scrollHeight
+            }, 500);
+        }
+        function AIBOT(msg) {
+            const querydata = Botdata.filter(x => x.key === msg)
+            console.log(filterValuePart(Botdata, msg));
+            if (querydata.length != 0) {
+                UpdSystem("系統", querydata[0].value);
+            }
+            else {
+                UpdSystem("系統", "我不知道這個問題，可以按上方按鈕與客服人員聯繫");
+            }
+        }
+
+        function filterValuePart(arr, part) {
+            return arr.filter(function (obj) {
+                return Object.keys(obj)
+                    .some(function (k) {
+                        return obj[k].indexOf(part) !== -1;
+                    });
+            });
+        };
+        function UpdContent(msg) {
+            $(`.chatBBody`).append(`<div class="chat">
+                                                                                       <div class="myName">我</div>
+                                                                                    <div class="myChat">
+                                                                                         ${msg}
+                                                                                  </div>
+                                                                             </div>`);
+            $(`#message`).val("");
+
+            $('.chatBBody').animate({
+                scrollTop: $(".chatBBody").offset().top + $(".chat")[$(".chatBBody").find(".chat").length - 1].scrollHeight
+            }, 500);
+        }
+        //-------購物車----
+        const carjson = document.querySelector('#car_iten');
+        const carHtml = document.querySelector('.car_click');
+        const TotoM = document.querySelector('.total_twd');
+        carHtml.addEventListener('click', () => {
+            SetCar();
+        })
+        async function dele(id) {
+            console.log(id);
+            const data = await fetch(`@Url.Content("~/Shopping/DeleteCarSession?id=${id}")`);
+            $(`#car_iten`).find(`#${id}`).remove();
+            SetCar()
+        }
+
+        async function joinCarSession() {
+            const reb = await fetch(`@Url.Content("~/Shopping/joinSQLToSession")`)
+            const data = await reb.text();
+            console.log(data);
+        }
+
+        async function SetCar() {
+            const reb = await fetch(`@Url.Content("~/Shopping/GetCarJson")`)
+            const data = await reb.json();
+            console.log(reb);
+            console.log(data);
+            countM = 0;
+            if (data != null) {
+                const carOpts = data.map((value) => {
+                    id = value.id
+                    a = value.圖片1檔名
+                    x = value.商品價格
+                    countM += x
+                    return (
+                        `<div class="row" id="${id}">
+                                                                    <div class="col-3">
+                                                                                        <img  src="@Url.Content("~/images/${a}")" width="70" />
+                                                                    </div>
+                                                                    <div class="col-8">
+                                                                                <div>品名:<a>${value.商品名稱}</a></div>
+                                                                                <div>尺寸:<a>${value.尺寸種類}</a></div>
+                                                                                <div>顏色:<a>${value.商品顏色種類}</a></div>
+                                                                                <div>數量:<a>${value.訂單數量}</a></div>
+                                                                                <div>價格:<a class="m">${value.商品價格}</a></div>
+
+                                                                    </div>
+                                                                            <div class="purchase-icon-car col-1">
+                                                                                                        <input type="hidden" value="${id}" />
+                                                                                     </div>
+                                                                            <br/>
+                                                                            </div>  `
+                    );
+                })
+                TOTAL_TWD = `TOTAL TWD $${countM}`
+                carjson.innerHTML = carOpts.join("")
+                TotoM.innerHTML = TOTAL_TWD
+                //const TrashCan = document.querySelector('.purchase-icon-car');
+                $('.purchase-icon-car').on('click', () => {
+                    console.log("123");
+                    var a = $(event.currentTarget).find("input").val();
+                    console.log(a);
+                    dele(a);
+                });
+            }
+        }
+        //-------購物車結束----
+
+
+        // 會員下拉選單
+        $('body').delegate('.shortcut', 'click', function () {
+            const _this = $(this);
+            const shortcutBox = _this.find('.shortcut-box');
+            if (shortcutBox.is(':hidden')) {
+                shortcutBox.show()
+
+            } else {
+                shortcutBox.hide();
+            }
+            return false;
+        })
+
+        $('body').delegate('.shortcut-box', 'click', function (e) {
+            e.stopPropagation();
+        })
+        // 點擊空白區域關閉下拉框
+        $(document).on('click', function (e) {
+            var cont = $('.shortcut,.shortcut-box');
+            if (!cont.is(e.target) && cont.has(e.target).length === 0) {
+                $('.shortcut-box').hide();
+            }
+        })
+
+        //判斷登入狀態
+        const memHtml = document.querySelector('.memclick');
+        memHtml.addEventListener('click', () => {
+            checklog();
+        })
+        async function checklog() {
+            const reb = await fetch(`@Url.Content("~/Home/checkmem")`)
+            const data = await reb.json();
+            if (data != null) {
+                $("#log").css("display", "none");
+                $("#log2").css("display", "flex");
+            }
+            else {
+                $("#log").css("display", "flex");
+                $("#log2").css("display", "none");
+            }
+        }
+
+
+        // 搜索框顯示
+        $('body').delegate('#web-search-btn', 'click', function () {
+            let _this = $(this);
+            let searchBox = _this.closest('.R-Top-tool').find('.search-box');
+            if (searchBox.hasClass('show')) {
+                searchBox.removeClass('show')
+            } else {
+                searchBox.addClass('show').find('input').focus();
+            }
+            return false;
+        })
+
+        // 搜尋
+        $('body').delegate('.search-btn', 'click', function () {
+            let _this = $(this);
+            if (!_this.hasClass('clicked')) {
+                _this.addClass('clicked');
+                $('.search-box').animate({
+                    left: '0.2rem', right: "1.5rem",
+                }, 100);
+            } else {
+                _this.removeClass('clicked');
+                $('.search-box').animate({
+                    left: '7.5rem', right: '7.5rem',
+                }, 100);
+            }
+            return false;
+        })
+
+        $('body').on('keyup', '.search_keyword', function (e) {
+            if (13 == e.keyCode) {
+                let value = $(this).val().trim();
+                if ('' == value) {
+                    return;
+                }
+
+                location.href = '/ProductWall/search?keyword=' + $('#search-box').val();
+            }
+        });
+
+        //TOP
+        $(".web-top .back-top").click(function () {
+            if ($('body').hasClass('pc-model')) {
+                $("html,body").animate({ scrollTop: '0px' }, 300); //回到顶部
+            } else {
+                $(".shop-content").animate({ scrollTop: '0px' }, 300); //回到顶部
+            }
+            return false;
+        });
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 800) {
+                $(".web-top").css("display", "block");
+            }
+            else {
+                $(".web-top").css("display", "none");
+            }
+        });
+
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

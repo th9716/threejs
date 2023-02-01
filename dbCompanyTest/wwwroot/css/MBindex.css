@@ -1,0 +1,46 @@
+﻿.mb1{
+    width:1158px;
+    margin:99px 5%;
+}
+.mb2{
+
+}
+
+.mbcard{
+    height:261px;
+}
+.c1 {
+    width: 221px;
+    height:100%;
+    border-radius: 25px;
+    border-color: #9A9A9A;
+    margin-left:30px;
+}
+.c1body{
+    width:80px;
+    height:110px;
+    margin:28% 31%;
+    
+}
+.c1img {
+    width: 48px;
+    margin:20px 1em;
+}
+
+.c2{
+    margin-top:4em;
+}
+.c2cod {
+    margin-left: 3.5em;
+    text-align:center;
+}
+.c2cod p{
+    margin-top:10px;
+}
+.c2logout{
+    align-items:center;
+    margin-top:3em;
+}
+    .c2logout p {
+        margin: 0px 0px 0px 10px;
+    }

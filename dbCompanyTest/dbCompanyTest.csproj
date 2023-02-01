@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\ClientsCheckData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\homeImg\cb28915426068cce507ee57e90f73fce.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\staff_login.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\3d\shiba\scene.bin" />
+    <None Include="wwwroot\3d\shiba\scene.gltf" />
+    <None Include="wwwroot\assets\js\config.js" />
+    <None Include="wwwroot\assets\js\dashboards-analytics.js" />
+    <None Include="wwwroot\assets\js\extended-ui-perfect-scrollbar.js" />
+    <None Include="wwwroot\assets\js\form-basic-inputs.js" />
+    <None Include="wwwroot\assets\js\icon_js\app.js" />
+    <None Include="wwwroot\assets\js\icon_js\app.js.map" />
+    <None Include="wwwroot\assets\js\icon_js\js\app.js" />
+    <None Include="wwwroot\assets\js\icon_js\js\app.js.map" />
+    <None Include="wwwroot\assets\js\main.js" />
+    <None Include="wwwroot\assets\js\pages-account-settings-account.js" />
+    <None Include="wwwroot\assets\js\ui-modals.js" />
+    <None Include="wwwroot\assets\js\ui-popover.js" />
+    <None Include="wwwroot\assets\js\ui-toasts.js" />
+    <None Include="wwwroot\assets\vendor\fonts\boxicons\boxicons.svg" />
+    <None Include="wwwroot\assets\vendor\fonts\boxicons\boxicons.woff2" />
+    <None Include="wwwroot\assets\vendor\js\bootstrap.js" />
+    <None Include="wwwroot\assets\vendor\js\helpers.js" />
+    <None Include="wwwroot\assets\vendor\js\menu.js" />
+    <None Include="wwwroot\assets\vendor\libs\apex-charts\apexcharts.js" />
+    <None Include="wwwroot\assets\vendor\libs\highlight\highlight.js" />
+    <None Include="wwwroot\assets\vendor\libs\jquery\jquery.js" />
+    <None Include="wwwroot\assets\vendor\libs\masonry\masonry.js" />
+    <None Include="wwwroot\assets\vendor\libs\perfect-scrollbar\perfect-scrollbar.js" />
+    <None Include="wwwroot\assets\vendor\libs\popper\popper.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.58.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.1.0" />
+  </ItemGroup>
+
+</Project>

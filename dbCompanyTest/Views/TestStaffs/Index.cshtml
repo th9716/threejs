@@ -1,0 +1,139 @@
+﻿@model IEnumerable<dbCompanyTest.Models.TestStaff>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Back_Layout_Sneat_HR";
+}
+<h1>員工列表</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.員工編號)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.員工姓名)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.員工電話)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.身分證字號)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.縣市)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.區)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.地址)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.緊急聯絡人)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.聯絡人關係)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.聯絡人電話)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.部門)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.主管)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.職稱)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.密碼)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.薪資)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.權限)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.在職)
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.員工編號)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.員工姓名)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.員工電話)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.身分證字號)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.縣市)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.區)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.地址)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.緊急聯絡人)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.聯絡人關係)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.聯絡人電話)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.部門)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.主管)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.職稱)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.密碼)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.薪資)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.權限)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.在職)
+            </td>
+            @*<td>
+                <a asp-action="Edit" asp-route-id="@item.員工編號">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.員工編號">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.員工編號">Delete</a>
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>

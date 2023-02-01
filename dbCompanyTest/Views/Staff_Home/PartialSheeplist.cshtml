@@ -1,0 +1,66 @@
+﻿<table class="table table-striped-columns">
+    <caption>待出貨清單</caption>
+    <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>客戶編號</th>
+
+            <th>商品數量</th>
+            <th>送貨地址</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="Sheeplist_tbody">
+    </tbody>
+</table>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">出貨單 <span></span></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" name="ShipperID" id="ShipperID">
+                <div class="form-group">
+                    <label for="CompanyName">訂單編號</label>
+                    <input type="text" class="form-control" id="SID" name="CompanyName" readonly="readonly">
+                </div>
+                <div class="form-group">
+                    <label for="Phone">客戶編號</label>
+                    <input type="text" class="form-control" id="CID" name="Phone" readonly="readonly">
+                </div>
+                <div class="form-group">
+                    <label for="Phone">送貨地址</label>
+                    <input type="text" class="form-control" id="Add" name="Phone" readonly="readonly">
+                </div>
+                @*<div id="SDT_div"> </div></div>*@
+                <table class="table table-striped-columns">
+                    <thead>
+                        <tr>
+                            <th>商品名稱</th>
+                            <th>尺寸種類</th>
+                            <th>色碼</th>
+                            <th>商品數量</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="SDT_tbody">
+                    </tbody>
+                </table>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary" id="buttonSend">列印出貨單</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @*<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>*@

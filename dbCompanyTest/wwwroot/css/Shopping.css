@@ -1,0 +1,37 @@
+﻿.car {
+    display: flex;
+    /*    justify-content: center;*/
+    /*flex-direction: column;*/
+    flex-wrap:wrap;
+    align-content: center !important;
+}
+.shopping-step {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    color: #9D9D9D;
+    padding: 80px 0px;
+}
+.stepRow {
+    border-top: solid 1px #BEBEBE;
+    width: 20%;
+    transform: translate(0%,50%)
+}
+.active{
+    color:black
+}
+
+.car_table {
+    width: 50%;
+}
+
+
+/*Form*/
+
+label {
+    float: left;
+    width: 100px;
+}
+.setMargin{
+    margin:20px
+}

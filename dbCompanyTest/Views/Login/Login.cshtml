@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+@section Style{
+    <link href="~/css/loginpage.css" rel="stylesheet" />
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+}
+
+<main>
+    <div id="LoginBack">
+        <div id="loginPage">
+
+            <div id="otherLogin">
+                <div id="g_id_onload"
+                     data-client_id="1097400727922-rjchl3ubr8r1mtjpirchq6v7dl9vfcb2.apps.googleusercontent.com"
+                     data-login_uri="https://localhost:7100/Login/loginSussess"
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin" style="width:200px;margin:50px auto;height:60px"
+                     data-type="standard"
+                     data-size="large"
+                     data-theme="outline"
+                     data-text="sign_in_with"
+                     data-shape="rectangular"
+                     data-logo_alignment="left">
+                </div>
+            </div>
+            <hr style="width:50%;margin:20px auto;" />
+            <div id="selfLogin">
+                <form>
+                    <input type="text" asp-controller="Login" asp-action="Login" name="txtAccount" class="Linput" id="account" placeholder="Email" value="gary@gmail.com" /><br />
+                    <span style="color:red;display:none" id="accounterror">請輸入帳號</span>
+                    <input type="password" asp-controller="Login" asp-action="Login" name="txtPassword" class="Linput" id="password" placeholder="密碼" value="123456" />
+                    <p id="result"></p>
+                    <botton type="submit" id="login">登入</botton><br />
+                    <botton id="forgetPassword" class="btn btn-warning">忘記密碼</botton>
+
+                </form>
+            </div>
+            <p>
+                還沒有帳號嗎? @*<a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=""> 註冊新會員</a>*@
+                @*<a asp-action="Create" asp-controller="TestClients" style="color:white">註冊新會員</a>*@
+                <span id="create">註冊新會員</span>
+            </p>
+        </div>
+    </div>
+    @*<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">註冊新會員</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    <form>
+    <div class="mb-3">
+    <label for="recipient-name" class="col-form-label">Recipient:</label>
+    <input type="text" class="form-control" id="recipient-name">
+    </div>
+    <div class="mb-3">
+    <label for="message-text" class="col-form-label">Message:</label>
+    <textarea class="form-control" id="message-text"></textarea>
+    </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary">註冊</button>
+    </div>
+    </div>
+    </div>
+    </div>*@
+</main>
+
+@section Scripts{
+    <script src="~/datas/taiwan_districts.js"></script>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener(`load`, () => {
+            var result = xhr.responseText;
+            if (result == `成功`) {
+                window.location.assign("https://localhost:7100/Home/Index");
+                joinCarSession();
+            } else {
+                if (result == "Nopassword")
+                    $(`#result`).html(`請輸入密碼`);
+                else
+                    $(`#result`).html(`帳號或密碼錯誤`);
+            }
+        });
+
+        $(`#login`).on(`click`, () => {
+            const account = $(`#account`).val();
+            const password = $(`#password`).val();
+            xhr.open(`post`, `/Login/checkLogin`);
+            xhr.setRequestHeader(`Content-Type`, `application/x-www-form-urlencoded`);
+            xhr.timeout = 5000;
+            xhr.send(`account=${account}&password=${password}`);
+        });
+        $(`#create`).on(`click`, function () {
+            $(`#loginPage`).load("@Url.Content("~/Login/CreateClient")");
+        });
+
+        $(`#forgetPassword`).on('click', async function () {
+            let account = $(`#account`);
+            if (account.val()) {
+                $.post("@Url.Content("~/Login/forgetPassword")", { "Email": account.val() }, function (data) {
+                    $(`#accounterror`).css("display", "block");
+                    $(`#accounterror`).text(data);
+                })
+            }
+            else {
+                $(`#accounterror`).css("display", "block");
+                $(`#accounterror`).text("請輸入帳號");
+            }
+        });
+
+        //---購物車載入--LU
+        async function joinCarSession() {
+            const reb = await fetch(`@Url.Content("~/Shopping/joinSQLToSession")`)
+            const data = await reb.text();
+            console.log(data);
+        };
+        //---購物車載入結束--LU
+
+
+    </script>
+    <script src="~/js/city_data.js"></script>
+}

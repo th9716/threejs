@@ -1,0 +1,96 @@
+﻿@model dbCompanyTest.Models.TestStaff
+
+@{
+    ViewData["Title"] = "login";
+}
+@{
+    Layout = null;
+}
+
+<link href="~/css/staff_login.css" rel="stylesheet" />
+
+
+<form>
+    @Html.AntiForgeryToken()
+    <div class="box1">
+        <div class="containerr">
+            <div class="top">
+                <header>員工登入</header>
+            </div>
+            <div class="input-field">
+                <input type="text" asp-controller="Staff_Home" asp-action="login" name="txtAccount" value="ST1-0008797" class="input" placeholder="Username" id="Username" />
+            </div>
+            <div class="input-field">
+                <input type="password" asp-controller="Staff_Home" asp-action="login" name="txtPassword" value="123456" class="input" placeholder="Password" id="Password" />
+            </div>
+            <div class="input-field">
+                <botton type="submit" class="submit" id="Login">登入</botton>
+                <botton class="Back" id="Login"><a asp-action="Index" asp-controller="Home">返回</a></botton>
+            </div>
+            <div class="two">
+                <botton id="forget" class="submit1">忘記密碼?</botton>
+                <p id="response"></p>
+            </div>
+        </div>
+    </div>
+</form>
+<botton class="submit1" id="spv_ad">spv_ad</botton>
+<botton class="submit1" id="spv_hr">spv_hr ST1-00668</botton>
+<botton class="submit1" id="hr1">hr ST1-00628</botton>
+<botton class="submit1" id="hr2">hr ST1-00597</botton>
+<botton class="submit1" id="bos">bo ST2-0010170</botton>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $("#response").css("display", "none");
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener(`load`, () => {
+        var result = xhr.responseText;
+        if (result == "CantNull") {
+            $("#response").css("display", "");
+            $(`#response`).html(`請輸入完整`);
+        }
+        else if (result == "false") {
+            $("#response").css("display", "");
+            $(`#response`).html(`帳號或密碼錯誤`);
+        }
+        else if (result == "success")
+            location.reload();
+    });
+
+    $(`#Login`).on(`click`, function () {
+
+        const account = $(`#Username`).val();
+        const password = $(`#Password`).val();
+        xhr.open(`post`, `@Url.Content("~/Staff_Home/login")`);
+        xhr.setRequestHeader(`Content-Type`, `application/x-www-form-urlencoded`);
+        xhr.send(`account=${account}&password=${password}`);
+    });
+
+
+    $(`#forget`).on('click', function () {
+        let account = $(`#Username`).val();
+        console.log(account);
+        if (account) {
+            console.log(account);
+            $.post("@Url.Content("~/Staff_Home/forgetPassword")", { "account": account }, function (data) {
+                $("#response").css("display", "");
+                $(`#response`).text(data);
+            })
+        }
+        else {
+            $("#response").css("display", "");
+            $(`#response`).text(`帳號?`);
+        }
+    });
+
+
+    $(`#spv_ad`).on(`click`, function () { $("#Username").val(`ST1-00596`); });
+    $(`#spv_hr`).on(`click`, function () { $("#Username").val(`ST1-00668`); });
+    $(`#hr1`).on(`click`, function () { $("#Username").val(`ST1-00628`); });
+    $(`#hr2`).on(`click`, function () { $("#Username").val(`ST1-00597`); });
+    $(`#bos`).on(`click`, function () { $("#Username").val(`ST2-0010170`); });
+
+</script>

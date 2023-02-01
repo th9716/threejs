@@ -1,0 +1,143 @@
+﻿@{
+    ViewData["Title"] = "Service";
+    Layout = "~/Views/Shared/_Back_Layout_Sneat.cshtml";
+}
+<link href="~/css/service.css" rel="stylesheet" />
+<div id="serviceName">
+    <h1 style="margin:5px 5%;">客戶服務中心</h1>
+    <div id="Main">
+        <div class="row">
+            <div class="list-group col-3">
+            </div>
+
+
+            <div class="col-5" id="callback">
+                <input type="hidden" id="connectionUserID" />
+                <h3 id="userName" style="text-align:center;">客戶名稱</h3>
+                <div id="msgArea">
+                </div>
+                <div id="inputArea">
+                    <input type="text" id="msg" />
+                    <img src="~/images/send.png" id="serverSend" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/aibot.js"></script>
+    <script>
+        //console.log(Botdata.key[0].你好);
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        connection.start().then(async function () {
+            //connection.invoke(`getName`, "客服人員");
+            const data = await fetch("@Url.Content("~/Staff_Home/StaffNum")");
+            const StaffNum = await data.text();
+            if (StaffNum == "fales")
+                alert("連線逾時請重新登入");
+            else
+                connection.invoke("getName", StaffNum).catch(function (err) {
+                    alert('傳送錯誤: ' + err.toString());
+                });
+            //console.log("連線成功");
+        });
+        connection.on(`userList`, function (data) {
+            const userList = JSON.parse(data);
+            const htmluserList = userList.map((value) => {
+                let color = "red";
+                if (value.newWords == 0) {
+                    color = "gray"
+                }
+                return (`<div class="list-group-item list-group-item-action" id="${value.connectionId}">
+                                                            <div class="d-flex w-100 justify-content-between">
+                                                                <h5 class="mb-1">${value.userName}</h5>
+                                                                <div style="width:10px;height:10px;border-radius:50px;background-color:${color}"></div>
+                                                            </div>
+                                                        </div>`);
+            });
+            $(`.list-group`).html(htmluserList.join(""));
+
+            let customerID = "";
+            let userdiv = document.getElementsByClassName(`list-group-item`);
+            for (let Item of userdiv) {
+                Item.addEventListener(`dblclick`, function () {
+                    console.log("qwe");
+                    customerID = $(this).attr("id");
+                    $(`#connectionUserID`).val(customerID);
+                    $(`#userName`).text($(this).find(`h5`).text());
+                    $(this).find(`h5`).next().css("background-color", "gray");
+                    connection.invoke(`bindWaiterUser`, customerID);
+                });
+            }
+        });
+
+        connection.on(`newClientMsg`, function (data) {
+            let clientName = $(`#userName`).text();
+            let clientwords = JSON.parse(data);
+            let htmlvliemtwords = clientwords.map((value) => {
+                if (value.substr(0, 1) == "S") {
+                    return (`<div class="chat">
+                                                                       <div class="myName">我</div>
+                                                                    <div class="myChat">
+                                                                         ${value.substr(1, value.length - 1)}
+                                                                  </div>
+                                                             </div>`);
+                }
+                else {
+                    return (`<div class="chat">
+                                                        <div class="otherName">${clientName}</div>
+                                                <div class="otherChat">
+                                                    ${value}
+                                                </div>
+                                            </div>`);
+                }
+            });
+            $(`#msgArea`).html(htmlvliemtwords.join(""));
+        });
+
+        $(`#serverSend`).on('click', function () {
+            let msg = $(`#msg`).val();
+            let clientID = $(`#connectionUserID`).val();
+
+            if (clientID){
+            connection.invoke("SendMessage", clientID, msg);
+            $(`#msg`).val("");
+            }
+            else{
+                alert("請選擇要服務的客戶");
+            }
+        });
+
+        connection.on("UpdContent", function (msg) {
+            $(`#msgArea`).append(`<div class="chat">
+                                                               <div class="myName">我</div>
+                                                            <div class="myChat">
+                                                                 ${msg}
+                                                          </div>
+                                                     </div>`);
+            $(`#message`).val("");
+
+            $('#msgArea').animate({
+                scrollTop: $("#msgArea").offset().top + $(".chat")[$("#msgArea").find(".chat").length - 1].scrollHeight
+            }, 500);
+        });
+
+        connection.on("UpdSystem", function (user, msg) {
+            $(`#msgArea`).append(`<div class="chat">
+                                        <div class="otherName">${user}</div>
+                                        <div class="otherChat">
+                                                    ${msg}
+                                        </div>
+                                    </div>`);
+            $('#msgArea').animate({
+                scrollTop: $("#msgArea").offset().top + $(".chat")[$("#msgArea").find(".chat").length - 1].scrollHeight
+            }, 500);
+        });
+    </script>
+}
+
